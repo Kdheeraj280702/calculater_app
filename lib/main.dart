@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
     '2',
     '3',
     '+',
-    'clear',
+    'Del',
     '0',
     '.',
     '='
@@ -56,6 +56,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Color.fromRGBO(208, 205, 215,100),
         body: Column(
           children: <Widget>[
             Expanded(
@@ -82,7 +83,7 @@ class _MyAppState extends State<MyApp> {
                       alignment: Alignment.centerRight,
                       child: Text(
                         answer,
-                        style: GoogleFonts.inconsolata(
+                        style: GoogleFonts.robotoSlab(
                           textStyle: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
@@ -105,17 +106,17 @@ class _MyAppState extends State<MyApp> {
                   itemBuilder: (BuildContext context, int index) {
                     return MyButton(
                       color: _isNumeric(matter[index])
-                          ? Colors.deepPurple[500]
-                          : Colors.grey[500],
+                          ? Color.fromRGBO(		11, 57, 72,100)
+                          : Color.fromRGBO(	136, 160, 158,100),
                       textcolor: _isNumeric(matter[index])
-                          ? Colors.grey[500]
-                          : Colors.deepPurple[500],
+                          ? Color.fromRGBO(136, 160, 158,100)
+                          : Color.fromRGBO(11, 57, 72,100),
                       buttontext: matter[index],
                       pressed: () {
                         setState(() {
-                          if (_isNumeric(matter[index])) {
+                           if (_isNumeric(matter[index])) {
                             userinput += matter[index];
-                          } else if (matter[index] == 'clear') {
+                          } else if (matter[index] == 'Del') {
                             if (userinput.length == 1 ||
                                 _isNumeric(userinput[userinput.length - 2]))
                               userinput =
@@ -133,6 +134,7 @@ class _MyAppState extends State<MyApp> {
                           } else if (matter[index] == '=') {
                             try {
                               eval();
+                              userinput = answer;
                             } catch (e) {
                               answer = "Go learn some math idiot";
                             }
